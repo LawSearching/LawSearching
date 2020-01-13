@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'main_page.dart';
 
+void main() => runApp(LawSearching());
+
 class LawSearching extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
