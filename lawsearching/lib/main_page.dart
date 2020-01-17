@@ -1,5 +1,11 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lawsearching/pages/CivilAvationRules/CivilAvationRulersDirectory.dart'; //民航法规、空管规章
+import 'package:lawsearching/pages/MingyongHangkong_rules/directory.dart'; //管制协议纪要
+
+import 'pages/Guanzhi_Xieyi/Guanzhi_Xieyi_Directory.dart'; //应急管理手册
+import 'pages/YingjiGuanliShouce/YingjiGuanliShouce_Directory.dart'; //民用航空空中交通管理规则
 
 class MainPage extends StatefulWidget {
   @override
@@ -9,6 +15,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   GlobalKey<FormState> searchKey = GlobalKey<FormState>();
   String searchByName = '';
+  bool selected = false;
   void search() {
     var searchForm = searchKey.currentState;
     if (searchForm.validate()) {
@@ -38,23 +45,39 @@ class _MainPageState extends State<MainPage> {
                   '中国法律法规大全',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: ScreenUtil().setSp(70),
+                    fontSize: ScreenUtil().setSp(65),
                     color: Colors.white,
                   ),
                 ),
               ),
-              _lawList(),
+              _lawList(selected),
             ],
           ),
         ),
         body: Scaffold(
           appBar: AppBar(
-            title: Text(
-              '法律法规检索',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: ScreenUtil().setSp(55),
-              ),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(' '),
+                Text(
+                  '法律法规检索',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: ScreenUtil().setSp(55),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Text(
+                    '反馈',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: ScreenUtil().setSp(50),
+                    ),
+                  ),
+                ),
+              ],
             ),
             centerTitle: true,
           ),
@@ -66,7 +89,7 @@ class _MainPageState extends State<MainPage> {
                   child: Container(
                     margin: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
                     width: ScreenUtil().setWidth(2048),
-                    height: ScreenUtil().setHeight(400),
+                    height: ScreenUtil().setHeight(320),
                     // decoration: BoxDecoration(
                     //   border: Border(
                     //     bottom: BorderSide(
@@ -81,7 +104,7 @@ class _MainPageState extends State<MainPage> {
                       style: TextStyle(
                           color: Colors.black38,
                           fontSize: ScreenUtil().setSp(55)),
-                      decoration: InputDecoration(hintText: '搜索'),
+                      decoration: InputDecoration(hintText: '法律法规搜索'),
                       textAlign: TextAlign.center,
                       obscureText: false,
                       onSaved: (value) {
@@ -93,6 +116,9 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ),
+                Divider(
+                  color: Colors.black38,
+                ),
                 Container(
                   alignment: Alignment.center,
                   width: ScreenUtil().setWidth(2048),
@@ -100,21 +126,13 @@ class _MainPageState extends State<MainPage> {
                   child: ListView.builder(
                     itemCount: 10,
                     itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
+                      return ListTile(
                         onTap: () {},
-                        child: Container(
-                          margin: EdgeInsets.all(5.0),
-                          padding: EdgeInsets.only(left: 30, top: 20),
-                          decoration: BoxDecoration(
-                              // color: Colors.white,
-                              border: Border(
-                                  bottom: BorderSide(
-                            style: BorderStyle.solid,
-                            color: Colors.grey,
-                            width: 1.0,
-                          ))),
-                          child: Text('data'),
+                        title: Text(
+                          'data',
+                          style: TextStyle(fontSize: ScreenUtil().setSp(50)),
                         ),
+                        trailing: Icon(Icons.chevron_right),
                       );
                     },
                   ),
@@ -127,7 +145,7 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Widget _lawList() {
+  Widget _lawList(bool select) {
     return Container(
       height: ScreenUtil().setHeight(2182),
       decoration: BoxDecoration(
@@ -146,157 +164,124 @@ class _MainPageState extends State<MainPage> {
           children: <Widget>[
             ListTile(
               title: Text(
-                '宪法',
+                '民用航空空中交通管理规则',
                 style: TextStyle(
                   fontSize: ScreenUtil().setSp(58),
-                  color: Colors.white,
+                  color: selected ? Colors.blueAccent[500] : Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Civil_Aviation_Directory()));
+              },
+            ),
+            Divider(
+              color: Colors.lightBlue[500],
             ),
             ListTile(
               title: Text(
-                '刑法',
+                '民 航 法 规 、空 管 规 章 ',
                 style: TextStyle(
                   fontSize: ScreenUtil().setSp(58),
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CivilAvationRulersDirectory()));
+              },
+            ),
+            Divider(
+              color: Colors.lightBlue[500],
             ),
             ListTile(
               title: Text(
-                '民法',
+                '管  制  协  议  纪  要',
                 style: TextStyle(
                   fontSize: ScreenUtil().setSp(58),
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Guanzhi_Xieyi_Directory()));
+              },
+            ),
+            Divider(
+              color: Colors.lightBlue[500],
+            ),
+            ExpansionTile(
+              title: Text(
+                '运 行 手 册',
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(58),
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    '管 理 手 册',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(50),
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: Text(
+                    '培 训 手 册',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(50),
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: Text(
+                    '运 行 手 册',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(50),
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  onTap: () {},
+                ),
+              ],
+            ),
+            Divider(
+              color: Colors.lightBlue[500],
             ),
             ListTile(
               title: Text(
-                '诉讼',
+                '应 急 管 理 手 册',
                 style: TextStyle(
                   fontSize: ScreenUtil().setSp(58),
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(
-                '行政',
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(
-                '商法',
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(
-                '劳动法',
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(
-                '经济法',
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(
-                '国际法',
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(
-                '常用法律',
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(
-                '最新法律',
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(
-                '全部法律',
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(
-                '司法解释',
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text(
-                '房地产',
-                style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => YingjiGuanliShouce_Directory()));
+              },
             ),
           ],
         ),
