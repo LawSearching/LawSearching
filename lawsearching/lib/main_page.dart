@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawsearching/pages/CivilAvationRules/CivilAvationRulersDirectory.dart'; //民航法规、空管规章
 import 'package:lawsearching/pages/MingyongHangkong_rules/directory.dart'; //管制协议纪要
-
+import 'package:lawsearching/pages/WorkingManual/managementHandbook.dart';
+import 'package:lawsearching/pages/WorkingManual/trainingHandbook.dart';
+import 'package:lawsearching/pages/WorkingManual/workingHandbook.dart';
 import 'pages/Guanzhi_Xieyi/Guanzhi_Xieyi_Directory.dart'; //应急管理手册
 import 'pages/YingjiGuanliShouce/YingjiGuanliShouce_Directory.dart'; //民用航空空中交通管理规则
 
@@ -122,7 +124,7 @@ class _MainPageState extends State<MainPage> {
                 Container(
                   alignment: Alignment.center,
                   width: ScreenUtil().setWidth(2048),
-                  height: ScreenUtil().setHeight(1655),
+                  height: ScreenUtil().setHeight(1620),
                   child: ListView.builder(
                     itemCount: 10,
                     itemBuilder: (BuildContext context, int index) {
@@ -238,7 +240,10 @@ class _MainPageState extends State<MainPage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ManagementHandbook()));
+                  },
                 ),
                 ListTile(
                   title: Text(
@@ -249,7 +254,10 @@ class _MainPageState extends State<MainPage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => TrainingHandbook()));
+                  },
                 ),
                 ListTile(
                   title: Text(
@@ -260,7 +268,10 @@ class _MainPageState extends State<MainPage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => WorkingHandbook()));
+                  },
                 ),
               ],
             ),
