@@ -14,6 +14,7 @@ import 'pages/YingjiGuanliShouce/YingjiGuanliShouce_Directory.dart'; //民用航
 
 String search_key = '法律法规名称搜索';
 var url = "http://39.97.103.161:8080/querybyKey";
+var url_1 = "http://39.97.103.161:8080/queryChapter";
 
 class MainPage extends StatefulWidget {
   @override
@@ -24,14 +25,17 @@ class _MainPageState extends State<MainPage> {
   GlobalKey<FormState> searchKey = GlobalKey<FormState>();
   String searchByName = '';
   bool selected = false;
-  List receive_data = [];//用来接收检索获得数据
-
+  List receive_data = []; //用来接收检索获得数据
 
   void search() {
     var searchForm = searchKey.currentState;
     if (searchForm.validate()) {
       searchForm.save();
-      getdata(searchByName);
+      if (search_key.contains('法律法规条文搜索')) {
+        getdata(searchByName);
+      } else {
+        getchapter(searchByName);
+      }
     }
   }
 
@@ -42,6 +46,26 @@ class _MainPageState extends State<MainPage> {
       Response response;
       var data = {"name": stringtext};
       response = await Dio().post(url, data: data);
+      for (var item in response.data) {
+        print('返回数据' + item.toString());
+      }
+      setState(() {
+        receive_data = response.data;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+/**
+ * 章查询
+ */
+  Future getchapter(String stringtext) async {
+    try {
+      print('正在访问章节数据...');
+      Response response;
+      var data = {"chapter": stringtext};
+      response = await Dio().post(url_1, data: data);
       for (var item in response.data) {
         print('返回数据' + item.toString());
       }
@@ -173,6 +197,7 @@ class _MainPageState extends State<MainPage> {
                           onTap: () {
                             setState(() {
                               search_key = '法律法规名称搜索';
+                              search();
                             });
                           },
                           child: Container(
