@@ -140,16 +140,16 @@ class _MainPageState extends State<MainPage> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    width: ScreenUtil().setWidth(2050),
-                    height: ScreenUtil().setHeight(315),
-                    color: Colors.green[300],
+                    width: ScreenUtil().setWidth(2048),
+                    height: ScreenUtil().setHeight(285),
+                    color: Colors.green[300],//****** */
                     alignment: Alignment.centerLeft,
                     child: Form(
                       key: searchKey,
                       child: Container(
                         margin: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
                         width: ScreenUtil().setWidth(2000),
-                        height: ScreenUtil().setHeight(315),
+                        height: ScreenUtil().setHeight(280),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -170,7 +170,7 @@ class _MainPageState extends State<MainPage> {
                                 autofocus: false,
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: ScreenUtil().setSp(30.0)),
+                                    fontSize: ScreenUtil().setSp(40.0)),
                                 decoration:
                                     InputDecoration(hintText: search_key),
                                 textAlign: TextAlign.left,
@@ -201,7 +201,7 @@ class _MainPageState extends State<MainPage> {
                             });
                           },
                           child: Container(
-                            height: ScreenUtil().setHeight(265.0),
+                            height: ScreenUtil().setHeight(250.0),
                             width: ScreenUtil().setWidth(500.0),
                             decoration: BoxDecoration(
                               color: Colors.orangeAccent,
@@ -224,7 +224,7 @@ class _MainPageState extends State<MainPage> {
                             });
                           },
                           child: Container(
-                            height: ScreenUtil().setHeight(265.0),
+                            height: ScreenUtil().setHeight(250.0),
                             width: ScreenUtil().setWidth(500.0),
                             decoration: BoxDecoration(
                               color: Colors.orangeAccent,
