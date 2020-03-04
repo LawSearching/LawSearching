@@ -140,7 +140,7 @@ class _MainPageState extends State<MainPage> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    width: ScreenUtil().setWidth(2050),
+                    width: ScreenUtil().setWidth(2048),
                     height: ScreenUtil().setHeight(315),
                     color: Colors.green[300],
                     alignment: Alignment.centerLeft,
