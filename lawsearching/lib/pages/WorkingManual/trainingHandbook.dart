@@ -33,8 +33,9 @@ class TrainingHandbook extends StatelessWidget {
             secondarylist = trainingList_L2_C6;
           }
           for (String item in secondarylist) {
-            secondaryCategory.add(new ExpansionTile(
+            secondaryCategory.add(new ListTile(
               title: Text(item),
+              onTap: (){},
             ));
           }
           return ExpansionTile(

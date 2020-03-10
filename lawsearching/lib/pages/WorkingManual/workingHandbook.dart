@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'WorkingManual_reader.dart';
 import 'directoryData.dart';
 
 class WorkingHandbook extends StatelessWidget {
@@ -37,15 +38,32 @@ class WorkingHandbook extends StatelessWidget {
           }
           if (secondarylist != []) {
             for (String item in secondarylist) {
-              secondaryCategory.add(new ExpansionTile(
+              secondaryCategory.add(new ListTile(
                 title: Text(item),
+                onTap: (){
+                   Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WorkingManualReader(
+                            '${secondarylist[index]}', item)));
+                },
               ));
             }
           }
           return ExpansionTile(
-            title: Text(managementList[index]),
+            title:InkWell(
+              onTap: (){
+                 Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WorkingManualReader(
+                            '${workingList[index]}', 'temp')));
+              },
+              child: Text(managementList[index]),
+            ),
             children: secondaryCategory,
           );
+          
         },
       ),
     );
