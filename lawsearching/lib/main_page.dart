@@ -329,7 +329,7 @@ class _MainPageState extends State<MainPage> {
             ),
             ListTile(
               title: Text(
-                '民 航 法 规 、空 管 规 章 ',
+                '管制规章电子化程序管理系统 ',
                 style: TextStyle(
                   fontSize: ScreenUtil().setSp(58),
                   color: Colors.white,
