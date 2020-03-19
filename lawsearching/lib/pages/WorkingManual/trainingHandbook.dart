@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'WorkingManual_reader.dart';
 import 'directoryData.dart';
 
 class TrainingHandbook extends StatelessWidget {
@@ -35,7 +36,13 @@ class TrainingHandbook extends StatelessWidget {
           for (String item in secondarylist) {
             secondaryCategory.add(new ListTile(
               title: Text(item),
-              onTap: (){},
+              onTap: (){
+                 Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WorkingManualReader(
+                              '${trainingList[index]}', item)));
+              },
             ));
           }
           return ExpansionTile(
