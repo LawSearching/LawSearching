@@ -7,8 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../ruler_Read.dart';
 
-
-
 var url_1 = "http://39.97.103.161:8080/managementbookquerybyChapter"; //按章查询;
 var url_2 = "http://39.97.103.161:8080/managementbookquerybySection"; //按章、节查询;
 var chapter_name = ''; //章名称
