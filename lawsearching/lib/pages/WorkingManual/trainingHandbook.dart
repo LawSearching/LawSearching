@@ -22,31 +22,34 @@ class TrainingHandbook extends StatelessWidget {
             secondarylist = trainingList_L2_C2;
           }
           if (index == 2) {
-            secondarylist = trainingList_L2_C3;
+            secondarylist = trainingList_L3_C3;
           }
           if (index == 3) {
-            secondarylist = trainingList_L2_C4;
-          }
-          if (index == 4) {
-            secondarylist = trainingList_L2_C5;
-          }
-          if (index == 5) {
-            secondarylist = trainingList_L2_C6;
+            secondarylist = trainingList_L4_C4;
           }
           for (String item in secondarylist) {
             secondaryCategory.add(new ListTile(
               title: Text(item),
-              onTap: (){
-                 Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => WorkingManualReader(
-                              '${trainingList[index]}', item)));
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WorkingManualReader(
+                            '培训手册', '${trainingList[index]}', item)));
               },
             ));
           }
           return ExpansionTile(
-            title: Text(trainingList[index]),
+            title: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WorkingManualReader(
+                            '培训手册', '${trainingList[index]}', 'temp')));
+              },
+              child: Text(trainingList[index]),
+            ),
             children: secondaryCategory,
           );
         },

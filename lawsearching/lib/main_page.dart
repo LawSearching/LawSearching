@@ -348,7 +348,7 @@ class _MainPageState extends State<MainPage> {
             ),
             ListTile(
               title: Text(
-                '管  制  协  议  纪  要',
+                '管 制 协 议 纪 要',
                 style: TextStyle(
                   fontSize: ScreenUtil().setSp(58),
                   color: Colors.white,
