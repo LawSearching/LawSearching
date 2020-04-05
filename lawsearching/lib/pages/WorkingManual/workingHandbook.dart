@@ -40,30 +40,29 @@ class WorkingHandbook extends StatelessWidget {
             for (String item in secondarylist) {
               secondaryCategory.add(new ListTile(
                 title: Text(item),
-                onTap: (){
-                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WorkingManualReader(
-                            '${secondarylist[index]}', item)));
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WorkingManualReader(
+                              '运行手册', '${secondarylist[index]}', item)));
                 },
               ));
             }
           }
           return ExpansionTile(
-            title:InkWell(
-              onTap: (){
-                 Navigator.push(
+            title: InkWell(
+              onTap: () {
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => WorkingManualReader(
-                            '${workingList[index]}', 'temp')));
+                            '运行手册', '${workingList[index]}', 'temp')));
               },
               child: Text(managementList[index]),
             ),
             children: secondaryCategory,
           );
-          
         },
       ),
     );

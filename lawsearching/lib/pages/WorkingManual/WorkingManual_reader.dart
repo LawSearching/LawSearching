@@ -7,16 +7,30 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../ruler_Read.dart';
 
+var managementbookurl_1 =
+    "http://39.97.103.161:8080/managementbookquerybyChapter"; //管理手册按章查询;
+var managementbookurl_2 =
+    "http://39.97.103.161:8080/managementbookquerybySection"; //管理手册按章、节查询;
+var traningbookurl_1 =
+    "http://39.97.103.161:8080/TrainBookquerybyChapter"; //培训手册按章查询;
+var traningbookurl_2 =
+    "http://39.97.103.161:8080/TrainBookquerybySection"; //培训手册按章、节查询;
+var runbookurl_1 =
+    "http://39.97.103.161:8080/RunBookquerybyChapter"; //运行手册按章查询;
+var runbookurl_2 =
+    "http://39.97.103.161:8080/RunBookquerybySection"; //运行手册按章、节查询;
 
-
-var url_1 = "http://39.97.103.161:8080/managementbookquerybyChapter"; //按章查询;
-var url_2 = "http://39.97.103.161:8080/managementbookquerybySection"; //按章、节查询;
+var handbook_name = ''; //手册名称
 var chapter_name = ''; //章名称
 var section_name = ''; //节名称
 List receive_data = [];
 
 class WorkingManualReader extends StatefulWidget {
-  WorkingManualReader(chaptername, sectionname) {
+  /**
+   * handbookname为培训手册，管理手册，运行手册名称;
+   */
+  WorkingManualReader(handbookname, chaptername, sectionname) {
+    handbook_name = handbookname;
     chapter_name = chaptername;
     section_name = sectionname;
   }
@@ -28,24 +42,18 @@ class WorkingManualReader extends StatefulWidget {
 class _WorkingManualReaderState extends State<WorkingManualReader> {
   List chapterName = chapter_name.split(' ');
   List sectionName = section_name.split(' ');
-  Future<String> loadAsset() async {
-    var content = await rootBundle.loadString('assets/TotalRulers.txt');
-    return content;
-  }
+  String temp_url = ''; //用来选择接口URL；
 
 /**
  * 章查询
  */
-  Future getchapter(String stringtext) async {
+  Future getchapter(String url, String stringtext) async {
     try {
       receive_data = [];
       print('正在访问章节数据...');
       Response response;
       var data = {"chapter": stringtext};
-      response = await Dio().post(url_1, data: data);
-      for (var item in response.data) {
-        print('返回数据' + item.toString());
-      }
+      response = await Dio().post(url, data: data);
       setState(() {
         receive_data = response.data;
       });
@@ -57,16 +65,13 @@ class _WorkingManualReaderState extends State<WorkingManualReader> {
 /**
  * 节查询
  */
-  Future getSection(String stringtext1, String stringtext2) async {
+  Future getSection(String url, String stringtext1, String stringtext2) async {
     try {
       receive_data = [];
       print('正在访问章节数据...');
       Response response;
       var data = {"chapter": stringtext1, "section": stringtext2};
-      response = await Dio().post(url_2, data: data);
-      for (var item in response.data) {
-        // print('返回节数据' + item.toString());
-      }
+      response = await Dio().post(url, data: data);
       setState(() {
         receive_data = response.data;
       });
@@ -78,17 +83,29 @@ class _WorkingManualReaderState extends State<WorkingManualReader> {
   @override
   void initState() {
     // TODO: implement initState
-    print('----------');
-    print(chapterName);
-    print(section_name);
-    if (section_name.contains('temp')) {
-      print(chapterName[0]);
-      getchapter(chapterName[0]);
-    } else {
-      String section_temp = section_name[0] + section_name[1] + section_name[2];
-      print('----------');
-      print(section_temp);
-      getSection(chapterName[0], section_temp);
+    print(handbook_name);
+    if (handbook_name.contains('管理手册')) {
+      if (section_name.contains('temp')) {
+        getchapter(managementbookurl_1, chapterName[0]);
+      } else {
+        getSection(managementbookurl_2, chapterName[0], sectionName[0]);
+      }
+    }
+
+    if (handbook_name.contains('培训手册')) {
+      if (section_name.contains('temp')) {
+        getchapter(traningbookurl_1, chapterName[0]);
+      } else {
+        getSection(traningbookurl_2, chapterName[0], sectionName[0]);
+      }
+    }
+
+    if (handbook_name.contains('运行手册')) {
+      if (section_name.contains('temp')) {
+        getchapter(runbookurl_1, chapterName[0]);
+      } else {
+        getSection(runbookurl_2, chapterName[0], sectionName[0]);
+      }
     }
   }
 
@@ -109,7 +126,7 @@ class _WorkingManualReaderState extends State<WorkingManualReader> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          RulerReaderPage(' ${receive_data[index]['内容']}')));
+                          RulerReaderPage('   ${receive_data[index]['内容']}')));
             },
             child: Card(
               elevation: 15.0,

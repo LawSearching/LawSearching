@@ -51,7 +51,7 @@ class ManagementHandbook extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => WorkingManualReader(
-                              '${workingList[index]}', item)));
+                             '管理手册', '${workingList[index]}', item)));
                 },
               ));
             }
@@ -63,7 +63,7 @@ class ManagementHandbook extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => WorkingManualReader(
-                            '${workingList[index]}', 'temp')));
+                           '管理手册', '${workingList[index]}', 'temp')));
               },
               child: Text(managementList[index]),
             ),

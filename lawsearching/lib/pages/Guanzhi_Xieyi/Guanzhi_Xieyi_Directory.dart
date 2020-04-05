@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lawsearching/pages/Guanzhi_Xieyi/GuanZhi_XieYiReader.dart';
 
 import 'Guanzhi_Xieyi_Data.dart';
 
@@ -16,19 +17,22 @@ class Guanzhi_Xieyi_Directory extends StatelessWidget {
         child: Column(
           children: <Widget>[
             ExpansionTile(
-              title: Text('工作协议纪要',style: TextStyle(fontSize: ScreenUtil().setSp(55)),),
+              title: Text(
+                '工作协议纪要',
+                style: TextStyle(fontSize: ScreenUtil().setSp(55)),
+              ),
               children: <Widget>[
                 ExpansionTile(
                   title: Text('军航————民航'),
-                  children: <Widget>[_junHang_MinHangList()],
+                  children: <Widget>[_junHang_MinHangList('军航-民航')],
                 ),
                 ExpansionTile(
                   title: Text('民航————民航'),
-                  children: <Widget>[_minHang_MinHangList()],
+                  children: <Widget>[_minHang_MinHangList('民航-民航')],
                 ),
                 ExpansionTile(
                   title: Text('民航————通航机场及公司'),
-                  children: <Widget>[_minHang_TongHangList()],
+                  children: <Widget>[_minHang_TongHangList('民航-通航机场及公司')],
                 ),
               ],
             ),
@@ -39,22 +43,28 @@ class Guanzhi_Xieyi_Directory extends StatelessWidget {
   }
 
 //军航————民航
-  Widget _junHang_MinHangList() {
+  Widget _junHang_MinHangList(String fist_directory) {
     return Container(
-      height: ScreenUtil().setHeight(1000),
+      height: ScreenUtil().setHeight(400),
       child: ListView.builder(
         itemCount: junHang_MinHang.length,
         itemBuilder: (context, index) => ListTile(
           title: Text('${junHang_MinHang[index]}'),
           trailing: Icon(Icons.chevron_right),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => GuanZhiXieYiReader(
+                        fist_directory, junHang_MinHang[index])));
+          },
         ),
       ),
     );
   }
 
 //民航————民航
-  Widget _minHang_MinHangList() {
+  Widget _minHang_MinHangList(String fist_directory) {
     return Container(
       height: ScreenUtil().setHeight(1000),
       child: ListView.builder(
@@ -62,22 +72,34 @@ class Guanzhi_Xieyi_Directory extends StatelessWidget {
         itemBuilder: (context, index) => ListTile(
           title: Text('${minHang_MinHang[index]}'),
           trailing: Icon(Icons.chevron_right),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => GuanZhiXieYiReader(
+                        fist_directory, minHang_MinHang[index])));
+          },
         ),
       ),
     );
   }
 
 //民航————通航机场及公司
-  Widget _minHang_TongHangList() {
+  Widget _minHang_TongHangList(String fist_directory) {
     return Container(
-      height: ScreenUtil().setHeight(1000),
+      height: ScreenUtil().setHeight(600),
       child: ListView.builder(
         itemCount: minHang_TongHang.length,
         itemBuilder: (context, index) => ListTile(
           title: Text('${minHang_TongHang[index]}'),
           trailing: Icon(Icons.chevron_right),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => GuanZhiXieYiReader(
+                        fist_directory, minHang_TongHang[index])));
+          },
         ),
       ),
     );
