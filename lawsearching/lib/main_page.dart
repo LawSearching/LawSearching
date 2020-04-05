@@ -1,7 +1,7 @@
-import 'dart:io';
 import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawsearching/pages/CivilAvationRules/CivilAvationRulersDirectory.dart'; //民航法规、空管规章
 import 'package:lawsearching/pages/MingyongHangkong_rules/directory.dart'; //管制协议纪要
@@ -10,11 +10,12 @@ import 'package:lawsearching/pages/WorkingManual/trainingHandbook.dart';
 import 'package:lawsearching/pages/WorkingManual/workingHandbook.dart';
 import 'package:lawsearching/ruler_Read.dart';
 import 'pages/Guanzhi_Xieyi/Guanzhi_Xieyi_Directory.dart'; //应急管理手册
-import 'pages/YingjiGuanliShouce/YingjiGuanliShouce_Directory.dart'; //民用航空空中交通管理规则
+import 'pages/YingjiGuanliShouce/YingjiGuanliShouce_Directory.dart';
+import 'searchLawName_result.dart'; //民用航空空中交通管理规则
 
 String search_key = '法律法规名称搜索';
-var url = "http://39.97.103.161:8080/querybyKey";
-var url_1 = "http://39.97.103.161:8080/queryChapter";
+var url = "http://39.97.103.161:8080/LawListquerybyName"; //法律名称搜索
+var url_1 = "http://39.97.103.161:8080/AllLawquerybyKey"; //全条纹搜索
 
 class MainPage extends StatefulWidget {
   @override
@@ -26,29 +27,24 @@ class _MainPageState extends State<MainPage> {
   String searchByName = '';
   bool selected = false;
   List receive_data = []; //用来接收检索获得数据
-
+  String selectedName = '';
   void search() {
     var searchForm = searchKey.currentState;
     if (searchForm.validate()) {
       searchForm.save();
-      if (search_key.contains('法律法规条文搜索')) {
-        getdata(searchByName);
-      } else {
-        getchapter(searchByName);
-      }
+      search_key.contains('法律法规条文搜索')
+          ? getdata(searchByName)
+          : getbyLawName(searchByName);
     }
   }
 
 /**条纹检索功能 */
   Future getdata(String stringtext) async {
     try {
-      print('正在访问数据...');
+      print('正在条文搜索数据.....');
       Response response;
-      var data = {"name": stringtext};
-      response = await Dio().post(url, data: data);
-      for (var item in response.data) {
-        print('返回数据' + item.toString());
-      }
+      var data = {"key": stringtext};
+      response = await Dio().post(url_1, data: data);
       setState(() {
         receive_data = response.data;
       });
@@ -58,17 +54,14 @@ class _MainPageState extends State<MainPage> {
   }
 
 /**
- * 章查询
+ * 法律名称查询
  */
-  Future getchapter(String stringtext) async {
+  Future getbyLawName(String stringtext) async {
     try {
-      print('正在访问章节数据...');
+      print('正在访问法律名称数据...');
       Response response;
-      var data = {"chapter": stringtext};
-      response = await Dio().post(url_1, data: data);
-      for (var item in response.data) {
-        print('返回数据' + item.toString());
-      }
+      var data = {"name": stringtext};
+      response = await Dio().post(url, data: data);
       setState(() {
         receive_data = response.data;
       });
@@ -111,24 +104,13 @@ class _MainPageState extends State<MainPage> {
         body: Scaffold(
           appBar: AppBar(
             title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(' '),
                 Text(
                   '法律法规搜索',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: ScreenUtil().setSp(55),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    '反馈',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: ScreenUtil().setSp(50),
-                    ),
                   ),
                 ),
               ],
@@ -197,6 +179,7 @@ class _MainPageState extends State<MainPage> {
                           onTap: () {
                             setState(() {
                               search_key = '法律法规名称搜索';
+                              selectedName = '法律法规名称搜索';
                               search();
                             });
                           },
@@ -220,6 +203,7 @@ class _MainPageState extends State<MainPage> {
                           onTap: () {
                             setState(() {
                               search_key = '法律法规条文搜索';
+                              selectedName = '法律法规条文搜索';
                               search();
                             });
                           },
@@ -244,49 +228,89 @@ class _MainPageState extends State<MainPage> {
                   Divider(
                     color: Colors.black38,
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    width: ScreenUtil().setWidth(2048),
-                    height: ScreenUtil().setHeight(1620),
-                    child: ListView.builder(
-                      itemCount: receive_data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        // Pattern pattern = r'\n';
-                        // List text =
-                        //     receive_data[index]['内容'].toString().split(pattern);
-                        // for (var item in text) {
-                        //   print(item);
-                        // }
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RulerReaderPage(
-                                        '${receive_data[index]['内容']}')));
-                          },
-                          child: Card(
-                            elevation: 10.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12.0))),
-                            child: Text(
-                              '     ${receive_data[index]['内容']}',
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: ScreenUtil().setSp(44.0)),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                  selectedName.contains('法律法规条文搜索')
+                      ? _lawlistShow()
+                      : _lawlistShowByName(),
                 ],
               ),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+//名称搜索结果
+  Widget _lawlistShowByName() {
+    return Container(
+      alignment: Alignment.center,
+      width: ScreenUtil().setWidth(2048),
+      height: ScreenUtil().setHeight(1620),
+      child: ListView.builder(
+        itemCount: receive_data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          LawNameSearchReader('${receive_data[index]['名称']}')));
+            },
+            child: Card(
+              elevation: 10.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12.0))),
+              child: Text(
+                '\n' + '  ${receive_data[index]['名称']}\n',
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                    color: Colors.black, fontSize: ScreenUtil().setSp(44.0)),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+//条文搜索后的返回结果
+  Widget _lawlistShow() {
+    return Container(
+      alignment: Alignment.center,
+      width: ScreenUtil().setWidth(2048),
+      height: ScreenUtil().setHeight(1620),
+      child: ListView.builder(
+        itemCount: receive_data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          RulerReaderPage('${receive_data[index]['内容']}')));
+            },
+            child: Card(
+              elevation: 10.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12.0))),
+              child: Text(
+                '${receive_data[index]['章']}' +
+                    '  ' +
+                    '${receive_data[index]['节']}\n' +
+                    '${receive_data[index]['内容']}',
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                    color: Colors.black, fontSize: ScreenUtil().setSp(44.0)),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
