@@ -116,22 +116,18 @@ class _GuanZhiXieYiReaderState extends State<GuanZhiXieYiReader> {
         itemCount: receive_data.length,
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          RulerReaderPage(' ${receive_data[index]['内容']}')));
-            },
             child: Card(
               elevation: 15.0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
-              child: Text(
-                '\n' + '       ${receive_data[index]['内容']}' + '\n',
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                    color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
+              child: Container(
+                margin: EdgeInsets.all(10.0),
+                child: Text(
+                  '\n' + '       ${receive_data[index]['内容']}' + '\n',
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                      color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
+                ),
               ),
             ),
           );

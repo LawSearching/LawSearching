@@ -65,11 +65,14 @@ class _LawNameSearchReaderState extends State<LawNameSearchReader> {
               elevation: 15.0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
-              child: Text(
-                '\n' + '${receive_data[index]['内容']}' + '\n',
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
+              child: Container(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  '\n' + '     ${receive_data[index]['内容']}' + '\n',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
+                ),
               ),
             ),
           );

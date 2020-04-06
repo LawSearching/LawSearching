@@ -42,9 +42,6 @@ class _FileReaderState extends State<FileReader> {
       Response response;
       var data = {"chapter": stringtext};
       response = await Dio().post(url_1, data: data);
-      for (var item in response.data) {
-        //print('返回数据' + item.toString());
-      }
       setState(() {
         receive_data = response.data;
       });
@@ -63,9 +60,6 @@ class _FileReaderState extends State<FileReader> {
       Response response;
       var data = {"chapter": stringtext1, "section": stringtext2};
       response = await Dio().post(url_2, data: data);
-      for (var item in response.data) {
-        // print('返回节数据' + item.toString());
-      }
       setState(() {
         receive_data = response.data;
       });
@@ -112,12 +106,15 @@ class _FileReaderState extends State<FileReader> {
             child: Card(
               elevation: 15.0,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
-              child: Text(
-                '\n' + '       ${receive_data[index]['内容']}' + '\n',
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                    color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              child: Container(
+                margin: EdgeInsets.all(10.0),
+                child: Text(
+                  '\n' + '       ${receive_data[index]['内容']}' + '\n',
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                      color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
+                ),
               ),
             ),
           );

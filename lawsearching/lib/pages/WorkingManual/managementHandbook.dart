@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'WorkingManual_reader.dart';
 import 'directoryData.dart';
 
@@ -9,7 +10,12 @@ class ManagementHandbook extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('管理手册'),
+        title: Text(
+          '管理手册',
+          style: TextStyle(
+            fontSize: ScreenUtil().setSp(60.0),
+          ),
+        ),
       ),
       body: ListView.builder(
         itemCount: managementList.length,
@@ -44,31 +50,54 @@ class ManagementHandbook extends StatelessWidget {
           }
           if (secondarylist != []) {
             for (String item in secondarylist) {
-              secondaryCategory.add(new ListTile(
-                title: Text(item),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => WorkingManualReader(
-                             '管理手册', '${workingList[index]}', item)));
-                },
-              ));
+              secondaryCategory.add(
+                new ListTile(
+                  title: Text(
+                    item,
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(35.0),
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WorkingManualReader(
+                                '管理手册', '${workingList[index]}', item)));
+                  },
+                ),
+              );
             }
           }
-          return ExpansionTile(
-            title: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WorkingManualReader(
-                           '管理手册', '${workingList[index]}', 'temp')));
-              },
-              child: Text(managementList[index]),
-            ),
-            children: secondaryCategory,
-          );
+          return index == 1
+              ? ListTile(
+                  title: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WorkingManualReader(
+                                  '管理手册', '${workingList[index]}', 'temp')));
+                    },
+                    child: Text(
+                      managementList[index],
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(40.0),
+                      ),
+                    ),
+                  ),
+                )
+              : ExpansionTile(
+                  title: InkWell(
+                    child: Text(
+                      managementList[index],
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(40.0),
+                      ),
+                    ),
+                  ),
+                  children: secondaryCategory,
+                );
         },
       ),
     );

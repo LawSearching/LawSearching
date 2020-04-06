@@ -3,7 +3,6 @@
  */
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../ruler_Read.dart';
 
@@ -82,7 +81,6 @@ class _WorkingManualReaderState extends State<WorkingManualReader> {
 
   @override
   void initState() {
-    // TODO: implement initState
     print(handbook_name);
     if (handbook_name.contains('管理手册')) {
       if (section_name.contains('temp')) {
@@ -132,11 +130,14 @@ class _WorkingManualReaderState extends State<WorkingManualReader> {
               elevation: 15.0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
-              child: Text(
-                '\n' + '${receive_data[index]['内容']}' + '\n',
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                    color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
+              child: Container(
+                margin: EdgeInsets.all(10.0),
+                child: Text(
+                  '\n' + '${receive_data[index]['内容']}' + '\n',
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                      color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
+                ),
               ),
             ),
           );

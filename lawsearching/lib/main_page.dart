@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lawsearching/pages/CivilAvationRules/CivilAvationRulersDirectory.dart'; //民航法规、空管规章
 import 'package:lawsearching/pages/MingyongHangkong_rules/directory.dart'; //管制协议纪要
 import 'package:lawsearching/pages/WorkingManual/managementHandbook.dart';
@@ -71,8 +72,19 @@ class _MainPageState extends State<MainPage> {
   }
 
   @override
+  void initState() {
+    Fluttertoast.showToast(
+      msg: '从最左侧可向右划出侧边导航栏',
+      fontSize: 80.0,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.CENTER,
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 2048, height: 2732, allowFontScaling: true);
+    ScreenUtil.init(context, width: 2560, height: 1600, allowFontScaling: true);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'MainPage',
@@ -89,10 +101,10 @@ class _MainPageState extends State<MainPage> {
                   color: Colors.lightBlue[800],
                 ),
                 child: Text(
-                  '民航法律法规',
+                  '管制规章电子化程序管理系统',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: ScreenUtil().setSp(65),
+                    fontSize: ScreenUtil().setSp(60.0),
                     color: Colors.white,
                   ),
                 ),
@@ -110,7 +122,7 @@ class _MainPageState extends State<MainPage> {
                   '法律法规搜索',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: ScreenUtil().setSp(55),
+                    fontSize: ScreenUtil().setSp(65.0),
                   ),
                 ),
               ],
@@ -122,37 +134,40 @@ class _MainPageState extends State<MainPage> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    width: ScreenUtil().setWidth(2048),
-                    height: ScreenUtil().setHeight(285),
-                    color: Colors.green[300],//****** */
+                    width: ScreenUtil().setWidth(2560.0),
+                    height: ScreenUtil().setHeight(200.0),
+                    color: Colors.blue[100],
                     alignment: Alignment.centerLeft,
                     child: Form(
                       key: searchKey,
                       child: Container(
                         margin: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
-                        width: ScreenUtil().setWidth(2000),
-                        height: ScreenUtil().setHeight(280),
+                        width: ScreenUtil().setWidth(2500.0),
+                        height: ScreenUtil().setHeight(200.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         ),
                         child: Row(
                           children: <Widget>[
-                            Text(' '),
-                            Icon(
-                              Icons.search,
-                              size: 30.0,
+                            Container(
+                              margin:
+                                  EdgeInsets.fromLTRB(25.0, 10.0, 10.0, 10.0),
+                              child: Icon(
+                                Icons.search,
+                                size: 30.0,
+                              ),
                             ),
                             Container(
                               alignment: Alignment.centerLeft,
-                              width: ScreenUtil().setWidth(1860),
-                              height: ScreenUtil().setHeight(185),
+                              width: ScreenUtil().setWidth(2300.0),
+                              height: ScreenUtil().setHeight(200.0),
                               color: Colors.white,
                               child: TextFormField(
                                 autofocus: false,
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: ScreenUtil().setSp(40.0)),
+                                    fontSize: ScreenUtil().setSp(45.0)),
                                 decoration:
                                     InputDecoration(hintText: search_key),
                                 textAlign: TextAlign.left,
@@ -184,17 +199,19 @@ class _MainPageState extends State<MainPage> {
                             });
                           },
                           child: Container(
-                            height: ScreenUtil().setHeight(250.0),
+                            margin: EdgeInsets.all(10.0),
+                            height: ScreenUtil().setHeight(140.0),
                             width: ScreenUtil().setWidth(500.0),
+                            padding: EdgeInsets.all(18.0),
                             decoration: BoxDecoration(
-                              color: Colors.orangeAccent,
+                              color: Colors.blueGrey[300],
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0)),
                             ),
                             child: Text('名称搜索',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(65.0),
+                                    fontSize: ScreenUtil().setSp(50.0),
                                     color: Colors.white)),
                           ),
                         ),
@@ -208,17 +225,19 @@ class _MainPageState extends State<MainPage> {
                             });
                           },
                           child: Container(
-                            height: ScreenUtil().setHeight(250.0),
+                            height: ScreenUtil().setHeight(140.0),
                             width: ScreenUtil().setWidth(500.0),
+                            margin: EdgeInsets.all(10.0),
+                            padding: EdgeInsets.all(18.0),
                             decoration: BoxDecoration(
-                              color: Colors.orangeAccent,
+                              color: Colors.blueGrey[300],
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0)),
                             ),
                             child: Text('条文搜索',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(65.0),
+                                    fontSize: ScreenUtil().setSp(50.0),
                                     color: Colors.white)),
                           ),
                         ),
@@ -244,7 +263,7 @@ class _MainPageState extends State<MainPage> {
   Widget _lawlistShowByName() {
     return Container(
       alignment: Alignment.center,
-      width: ScreenUtil().setWidth(2048),
+      width: ScreenUtil().setWidth(2545),
       height: ScreenUtil().setHeight(1620),
       child: ListView.builder(
         itemCount: receive_data.length,
@@ -260,14 +279,17 @@ class _MainPageState extends State<MainPage> {
             child: Card(
               elevation: 10.0,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12.0))),
-              child: Text(
-                '\n' + '  ${receive_data[index]['名称']}\n',
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                    color: Colors.black, fontSize: ScreenUtil().setSp(44.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              child: Container(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  '\n' + '     ${receive_data[index]['名称']}\n',
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                      color: Colors.black, fontSize: ScreenUtil().setSp(44.0)),
+                ),
               ),
             ),
           );
@@ -280,7 +302,7 @@ class _MainPageState extends State<MainPage> {
   Widget _lawlistShow() {
     return Container(
       alignment: Alignment.center,
-      width: ScreenUtil().setWidth(2048),
+      width: ScreenUtil().setWidth(2545),
       height: ScreenUtil().setHeight(1620),
       child: ListView.builder(
         itemCount: receive_data.length,
@@ -296,17 +318,20 @@ class _MainPageState extends State<MainPage> {
             child: Card(
               elevation: 10.0,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12.0))),
-              child: Text(
-                '${receive_data[index]['章']}' +
-                    '  ' +
-                    '${receive_data[index]['节']}\n' +
-                    '${receive_data[index]['内容']}',
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                    color: Colors.black, fontSize: ScreenUtil().setSp(44.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              child: Container(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  '     ${receive_data[index]['章']}' +
+                      '  ' +
+                      '     ${receive_data[index]['节']}\n' +
+                      '     ${receive_data[index]['内容']}',
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                      color: Colors.black, fontSize: ScreenUtil().setSp(44.0)),
+                ),
               ),
             ),
           );
@@ -317,7 +342,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget _lawList(bool select) {
     return Container(
-      height: ScreenUtil().setHeight(2182),
+      height: ScreenUtil().setHeight(1050.0),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: <Color>[
@@ -336,7 +361,7 @@ class _MainPageState extends State<MainPage> {
               title: Text(
                 '民用航空空中交通管理规则',
                 style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
+                  fontSize: ScreenUtil().setSp(42.0),
                   color: selected ? Colors.blueAccent[500] : Colors.white,
                 ),
                 textAlign: TextAlign.center,
@@ -353,9 +378,9 @@ class _MainPageState extends State<MainPage> {
             ),
             ListTile(
               title: Text(
-                '管制规章电子化程序管理系统 ',
+                '民航法律法规',
                 style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
+                  fontSize: ScreenUtil().setSp(42.0),
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
@@ -374,7 +399,7 @@ class _MainPageState extends State<MainPage> {
               title: Text(
                 '管 制 协 议 纪 要',
                 style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
+                  fontSize: ScreenUtil().setSp(42.0),
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
@@ -393,7 +418,7 @@ class _MainPageState extends State<MainPage> {
               title: Text(
                 '运 行 手 册',
                 style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
+                  fontSize: ScreenUtil().setSp(42.0),
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
@@ -403,7 +428,7 @@ class _MainPageState extends State<MainPage> {
                   title: Text(
                     '管 理 手 册',
                     style: TextStyle(
-                      fontSize: ScreenUtil().setSp(50),
+                      fontSize: ScreenUtil().setSp(38.0),
                       color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
@@ -417,7 +442,7 @@ class _MainPageState extends State<MainPage> {
                   title: Text(
                     '培 训 手 册',
                     style: TextStyle(
-                      fontSize: ScreenUtil().setSp(50),
+                      fontSize: ScreenUtil().setSp(38.0),
                       color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
@@ -431,7 +456,7 @@ class _MainPageState extends State<MainPage> {
                   title: Text(
                     '运 行 手 册',
                     style: TextStyle(
-                      fontSize: ScreenUtil().setSp(50),
+                      fontSize: ScreenUtil().setSp(38.0),
                       color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
@@ -450,7 +475,7 @@ class _MainPageState extends State<MainPage> {
               title: Text(
                 '应 急 管 理 手 册',
                 style: TextStyle(
-                  fontSize: ScreenUtil().setSp(58),
+                  fontSize: ScreenUtil().setSp(42.0),
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.center,

@@ -10,47 +10,85 @@ class CivilAvationRulersDirectory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('民航法规、空管规章'),
+          title: Text(
+            '民航法规、空管规章',
+            style: TextStyle(fontSize: ScreenUtil().setSp(60.0)),
+          ),
         ),
         body: SingleChildScrollView(
             child: Column(
           children: <Widget>[
             ExpansionTile(
-              title: Text('国家法律法规'),
+              title: Text(
+                '国家法律法规',
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(40.0),
+                ),
+              ),
               children: <Widget>[
                 ExpansionTile(
-                  title: Text('中华人民共和国宪法'),
+                  title: Text(
+                    '中华人民共和国宪法',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(35.0),
+                    ),
+                  ),
                   children: <Widget>[
                     _civilAvationDirectory1('国家法律法规', '中华人民共和国宪法'),
                   ],
                 ),
                 ExpansionTile(
-                  title: Text('中华人民共和国保守国家秘密法'),
+                  title: Text(
+                    '中华人民共和国保守国家秘密法',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(35.0),
+                    ),
+                  ),
                   children: <Widget>[
                     _civilAvationDirectory1('国家法律法规', '中华人民共和国保守国家秘密法'),
                   ],
                 ),
                 ExpansionTile(
-                  title: Text('中华人民共和国安全生产法及相关条例'),
+                  title: Text(
+                    '中华人民共和国安全生产法及相关条例',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(35.0),
+                    ),
+                  ),
                   children: <Widget>[
                     _civilAvationDirectory(
                         safeProduceLawAndOtherConnectionMessage),
                   ],
                 ),
                 ExpansionTile(
-                  title: Text('中国人民共和国劳动法和劳动合同法以及相关法律规定'),
+                  title: Text(
+                    '中国人民共和国劳动法和劳动合同法以及相关法律规定',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(35.0),
+                    ),
+                  ),
                   children: <Widget>[
                     _civilAvationDirectory(labourLawAndOtherConnectionMessage),
                   ],
                 ),
                 ExpansionTile(
-                  title: Text('中华人民共和国民用航空法'),
+                  title: Text(
+                    '中华人民共和国民用航空法',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(35.0),
+                    ),
+                  ),
                   children: <Widget>[
                     _civilAvationDirectory1('国家法律法规', '中华人民共和国民用航空法'),
                   ],
                 ),
                 ExpansionTile(
-                  title: Text('中国人民共和国飞行基本规则'),
+                  title: Text(
+                    '中国人民共和国飞行基本规则',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(35.0),
+                    ),
+                  ),
                   children: <Widget>[
                     _civilAvationDirectory1('国家法律法规', '中国人民共和国飞行基本规则'),
                   ],
@@ -58,31 +96,61 @@ class CivilAvationRulersDirectory extends StatelessWidget {
               ],
             ),
             ExpansionTile(
-              title: Text('民航规章'),
+              title: Text(
+                '民航规章',
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(40.0),
+                ),
+              ),
               children: <Widget>[
                 ExpansionTile(
-                  title: Text('民用航空'),
+                  title: Text(
+                    '民用航空',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(35.0),
+                    ),
+                  ),
                   children: <Widget>[
                     ExpansionTile(
-                      title: Text('民用航空使用空域办法'),
+                      title: Text(
+                        '民用航空使用空域办法',
+                        style: TextStyle(
+                          fontSize: ScreenUtil().setSp(35.0),
+                        ),
+                      ),
                       children: <Widget>[
                         _civilAvationDirectory2('民用航空', '民用航空使用空域办法'),
                       ],
                     ),
                     ExpansionTile(
-                      title: Text('民用机场飞行程序和运行最低标准管理规定'),
+                      title: Text(
+                        '民用机场飞行程序和运行最低标准管理规定',
+                        style: TextStyle(
+                          fontSize: ScreenUtil().setSp(35.0),
+                        ),
+                      ),
                       children: <Widget>[
                         _civilAvationDirectory2('民用航空', '民用机场飞行程序和运行最低标准管理规定'),
                       ],
                     ),
                     ExpansionTile(
-                      title: Text('民用航空航行通告发布规定'),
+                      title: Text(
+                        '民用航空航行通告发布规定',
+                        style: TextStyle(
+                          fontSize: ScreenUtil().setSp(35.0),
+                        ),
+                      ),
                       children: <Widget>[
                         _civilAvationDirectory2('民用航空', '民用航空航行通告发布规定'),
                       ],
                     ),
                     ExpansionTile(
-                      title: Text('搜寻援救民用航空器工作手册'),
+                      title: Text(
+                        '搜寻援救民用航空器工作手册',
+                        style: TextStyle(
+                          fontSize: ScreenUtil().setSp(35.0),
+                        ),
+                      ),
                       children: <Widget>[
                         _civilAvationDirectory2('民用航空', '搜寻援救民用航空器工作手册'),
                       ],
@@ -90,16 +158,31 @@ class CivilAvationRulersDirectory extends StatelessWidget {
                   ],
                 ),
                 ExpansionTile(
-                  title: Text('通用航空'),
+                  title: Text(
+                    '通用航空',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(35.0),
+                    ),
+                  ),
                   children: <Widget>[
                     ExpansionTile(
-                      title: Text('通用航空飞行管制条例'),
+                      title: Text(
+                        '通用航空飞行管制条例',
+                        style: TextStyle(
+                          fontSize: ScreenUtil().setSp(35.0),
+                        ),
+                      ),
                       children: <Widget>[
                         _commonFlyDirectory2('通用航空', '通用航空飞行管制条例'),
                       ],
                     ),
                     ExpansionTile(
-                      title: Text('民用无人驾驶航空器系统空中交通管理办法'),
+                      title: Text(
+                        '民用无人驾驶航空器系统空中交通管理办法',
+                        style: TextStyle(
+                          fontSize: ScreenUtil().setSp(35.0),
+                        ),
+                      ),
                       children: <Widget>[
                         _commonFlyDirectory2('通用航空', '民用无人驾驶航空器系统空中交通管理办法'),
                       ],
@@ -243,7 +326,12 @@ class CivilAvationRulersDirectory extends StatelessWidget {
             }
             return ExpansionTile(
               title: InkWell(
-                child: Text('${directory_list[index]}'),
+                child: Text(
+                  '${directory_list[index]}',
+                  style: TextStyle(
+                    fontSize: ScreenUtil().setSp(35.0),
+                  ),
+                ),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -300,7 +388,12 @@ class CivilAvationRulersDirectory extends StatelessWidget {
             secondaryCategory = [];
             for (String item in secondarylist) {
               secondaryCategory.add(new ListTile(
-                title: Text(item),
+                title: Text(
+                  item,
+                  style: TextStyle(
+                    fontSize: ScreenUtil().setSp(35.0),
+                  ),
+                ),
                 trailing: Icon(Icons.chevron_right),
                 onTap: () {
                   Navigator.push(
@@ -313,7 +406,12 @@ class CivilAvationRulersDirectory extends StatelessWidget {
             }
             return ExpansionTile(
               title: InkWell(
-                child: Text('${directory_list[index]}'),
+                child: Text(
+                  '${directory_list[index]}',
+                  style: TextStyle(
+                    fontSize: ScreenUtil().setSp(35.0),
+                  ),
+                ),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -342,7 +440,12 @@ class CivilAvationRulersDirectory extends StatelessWidget {
       child: ListView.builder(
         itemCount: directory_list.length,
         itemBuilder: (context, index) => ListTile(
-          title: Text('${directory_list[index]}'),
+          title: Text(
+            '${directory_list[index]}',
+            style: TextStyle(
+              fontSize: ScreenUtil().setSp(35.0),
+            ),
+          ),
           trailing: Icon(Icons.chevron_right),
           onTap: () {
             Navigator.push(

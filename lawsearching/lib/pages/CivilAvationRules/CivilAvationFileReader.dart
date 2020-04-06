@@ -8,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../ruler_Read.dart';
 import './service_url.dart';
 
-
 var chapter_name = ''; //章名称
 var directory_name = ''; //大目录名称
 var directory_name_2 = ''; //目录名称
@@ -248,7 +247,7 @@ class _CivilAvationFileReaderState extends State<CivilAvationFileReader> {
         directory_name_2.contains('浙江省企业职工安全生产教育管理规定') &&
         section_name.contains('-')) {
       getchapter(url_44, chapterName[0]);
-    }else if (directory_name.contains('国家法律法规') &&
+    } else if (directory_name.contains('国家法律法规') &&
         directory_name_2.contains('浙江省危险化学品安全管理实施办法') &&
         section_name.contains('-')) {
       getchapter(url_45, chapterName[0]);
@@ -278,11 +277,14 @@ class _CivilAvationFileReaderState extends State<CivilAvationFileReader> {
               elevation: 15.0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
-              child: Text(
-                '\n' + '       ${receive_data[index]['内容']}' + '\n',
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                    color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
+              child: Container(
+                margin: EdgeInsets.all(10.0),
+                child: Text(
+                  '\n' + '       ${receive_data[index]['内容']}' + '\n',
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                      color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
+                ),
               ),
             ),
           );

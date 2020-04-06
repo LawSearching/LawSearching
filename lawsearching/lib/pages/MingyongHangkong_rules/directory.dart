@@ -1,10 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawsearching/pages/MingyongHangkong_rules/fileReader.dart';
-import 'package:lawsearching/sqlManger/my_db_method.dart'; //导出sqflite通用方法
 import 'CivilAvationData.dart';
-import 'package:lawsearching/main_page.dart';
 
 var url_1 = "http://39.97.103.161:8080/queryChapter";
 List receive_data = [];
@@ -26,7 +23,12 @@ class _Civil_Aviation_DirectoryState extends State<Civil_Aviation_Directory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('民用航空空中交通管理规则'),
+        title: Text(
+          '民用航空空中交通管理规则',
+          style: TextStyle(
+            fontSize: ScreenUtil().setSp(60.0),
+          ),
+        ),
       ),
       body: ListView.builder(
         itemCount: civilAvtionDirectorylistName.length,
@@ -102,30 +104,60 @@ class _Civil_Aviation_DirectoryState extends State<Civil_Aviation_Directory> {
           }
           for (var item in tempdirectorylist) {
             secondaryCategory.add(new ListTile(
-              title: Text(item),
+              title: Text(
+                item,
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(35.0),
+                ),
+              ),
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FileReader(
-                            '${civilAvtionDirectorylistName[index1]}', item)));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FileReader(
+                        '${civilAvtionDirectorylistName[index1]}', item),
+                  ),
+                );
               },
             ));
           }
-          return ExpansionTile(
-            title: InkWell(
-              onTap: () {
-                Navigator.push(
+          if (index1 == 0 ||
+              index1 == 7 ||
+              index1 == 8 ||
+              index1 == 9 ||
+              index1 == 18) {
+            return ListTile(
+              title: InkWell(
+                onTap: () {
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => FileReader(
-                            '${civilAvtionDirectorylistName[index1]}',
-                            'temp')));
-              },
-              child: Text(civilAvtionDirectorylistName[index1]),
-            ),
-            children: secondaryCategory,
-          );
+                      builder: (context) => FileReader(
+                          '${civilAvtionDirectorylistName[index1]}', 'temp'),
+                    ),
+                  );
+                },
+                child: Text(
+                  civilAvtionDirectorylistName[index1],
+                  style: TextStyle(
+                    fontSize: ScreenUtil().setSp(40.0),
+                  ),
+                ),
+              ),
+            );
+          } else {
+            return ExpansionTile(
+              title: InkWell(
+                child: Text(
+                  civilAvtionDirectorylistName[index1],
+                  style: TextStyle(
+                    fontSize: ScreenUtil().setSp(40.0),
+                  ),
+                ),
+              ),
+              children: secondaryCategory,
+            );
+          }
         },
       ),
     );

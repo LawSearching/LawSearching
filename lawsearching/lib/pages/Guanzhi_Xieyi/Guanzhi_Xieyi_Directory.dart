@@ -11,7 +11,12 @@ class Guanzhi_Xieyi_Directory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('管 制 协 议 纪 要'),
+        title: Text(
+          '管 制 协 议 纪 要',
+          style: TextStyle(
+            fontSize: ScreenUtil().setSp(60),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -19,19 +24,36 @@ class Guanzhi_Xieyi_Directory extends StatelessWidget {
             ExpansionTile(
               title: Text(
                 '工作协议纪要',
-                style: TextStyle(fontSize: ScreenUtil().setSp(55)),
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(40.0),
+                ),
               ),
               children: <Widget>[
                 ExpansionTile(
-                  title: Text('军航————民航'),
+                  title: Text(
+                    '军航————民航',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(35.0),
+                    ),
+                  ),
                   children: <Widget>[_junHang_MinHangList('军航-民航')],
                 ),
                 ExpansionTile(
-                  title: Text('民航————民航'),
+                  title: Text(
+                    '民航————民航',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(35.0),
+                    ),
+                  ),
                   children: <Widget>[_minHang_MinHangList('民航-民航')],
                 ),
                 ExpansionTile(
-                  title: Text('民航————通航机场及公司'),
+                  title: Text(
+                    '民航————通航机场及公司',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(35.0),
+                    ),
+                  ),
                   children: <Widget>[_minHang_TongHangList('民航-通航机场及公司')],
                 ),
               ],
@@ -49,7 +71,12 @@ class Guanzhi_Xieyi_Directory extends StatelessWidget {
       child: ListView.builder(
         itemCount: junHang_MinHang.length,
         itemBuilder: (context, index) => ListTile(
-          title: Text('${junHang_MinHang[index]}'),
+          title: Text(
+            '${junHang_MinHang[index]}',
+            style: TextStyle(
+              fontSize: ScreenUtil().setSp(35.0),
+            ),
+          ),
           trailing: Icon(Icons.chevron_right),
           onTap: () {
             Navigator.push(
@@ -70,7 +97,12 @@ class Guanzhi_Xieyi_Directory extends StatelessWidget {
       child: ListView.builder(
         itemCount: minHang_MinHang.length,
         itemBuilder: (context, index) => ListTile(
-          title: Text('${minHang_MinHang[index]}'),
+          title: Text(
+            '${minHang_MinHang[index]}',
+            style: TextStyle(
+              fontSize: ScreenUtil().setSp(35.0),
+            ),
+          ),
           trailing: Icon(Icons.chevron_right),
           onTap: () {
             Navigator.push(
@@ -91,7 +123,12 @@ class Guanzhi_Xieyi_Directory extends StatelessWidget {
       child: ListView.builder(
         itemCount: minHang_TongHang.length,
         itemBuilder: (context, index) => ListTile(
-          title: Text('${minHang_TongHang[index]}'),
+          title: Text(
+            '${minHang_TongHang[index]}',
+            style: TextStyle(
+              fontSize: ScreenUtil().setSp(35.0),
+            ),
+          ),
           trailing: Icon(Icons.chevron_right),
           onTap: () {
             Navigator.push(

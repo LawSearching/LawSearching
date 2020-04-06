@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 String textmessage = '';
-String lawlistreturn_url = 'http://39.97.103.161:8080/LawListReturn';//法律名称搜索
+String lawlistreturn_url = 'http://39.97.103.161:8080/LawListReturn'; //法律名称搜索
+
 class RulerReaderPage extends StatelessWidget {
   RulerReaderPage(text_message) {
     textmessage = text_message;
@@ -25,11 +26,14 @@ class RulerReaderPage extends StatelessWidget {
           elevation: 10.0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12.0))),
-          child: Text(
-            '\n' + '      ' + textmessage + '\n',
-            textAlign: TextAlign.justify,
-            style: TextStyle(
-                color: Colors.black, fontSize: ScreenUtil().setSp(55.0)),
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            child: Text(
+              '\n' + '      ' + textmessage + '\n',
+              textAlign: TextAlign.justify,
+              style: TextStyle(
+                  color: Colors.black, fontSize: ScreenUtil().setSp(55.0)),
+            ),
           ),
         ),
       ),

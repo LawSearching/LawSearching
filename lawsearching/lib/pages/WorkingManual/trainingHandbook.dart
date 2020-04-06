@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'WorkingManual_reader.dart';
 import 'directoryData.dart';
 
@@ -9,7 +10,12 @@ class TrainingHandbook extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('培训手册'),
+        title: Text(
+          '培训手册',
+          style: TextStyle(
+            fontSize: ScreenUtil().setSp(60.0),
+          ),
+        ),
       ),
       body: ListView.builder(
         itemCount: trainingList.length,
@@ -29,7 +35,12 @@ class TrainingHandbook extends StatelessWidget {
           }
           for (String item in secondarylist) {
             secondaryCategory.add(new ListTile(
-              title: Text(item),
+              title: Text(
+                item,
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(35.0),
+                ),
+              ),
               onTap: () {
                 Navigator.push(
                     context,
@@ -41,14 +52,12 @@ class TrainingHandbook extends StatelessWidget {
           }
           return ExpansionTile(
             title: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WorkingManualReader(
-                            '培训手册', '${trainingList[index]}', 'temp')));
-              },
-              child: Text(trainingList[index]),
+              child: Text(
+                trainingList[index],
+                style: TextStyle(
+                  fontSize: ScreenUtil().setSp(40.0),
+                ),
+              ),
             ),
             children: secondaryCategory,
           );

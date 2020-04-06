@@ -6,10 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../ruler_Read.dart';
-
-
-
 var url_1 = "http://39.97.103.161:8080/emergencybookquerybyChapter"; //按章查询;
 var url_2 = "http://39.97.103.161:8080/emergencybookquerybySection"; //按章、节查询;
 var chapter_name = ''; //章名称
@@ -65,9 +61,6 @@ class _EmergencyFileReaderState extends State<EmergencyFileReader> {
       Response response;
       var data = {"chapter": stringtext1, "section": stringtext2};
       response = await Dio().post(url_2, data: data);
-      for (var item in response.data) {
-        // print('返回节数据' + item.toString());
-      }
       setState(() {
         receive_data = response.data;
       });
@@ -78,7 +71,6 @@ class _EmergencyFileReaderState extends State<EmergencyFileReader> {
 
   @override
   void initState() {
-    // TODO: implement initState
     print('----------');
     print(chapterName);
     print(section_name);
@@ -105,22 +97,18 @@ class _EmergencyFileReaderState extends State<EmergencyFileReader> {
         itemCount: receive_data.length,
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          RulerReaderPage(' ${receive_data[index]['内容']}')));
-            },
             child: Card(
               elevation: 15.0,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
-              child: Text(
-                '\n' + '${receive_data[index]['内容']}' + '\n',
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                    color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              child: Container(
+                margin: EdgeInsets.all(10.0),
+                child: Text(
+                  '\n' + '${receive_data[index]['内容']}' + '\n',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
+                ),
               ),
             ),
           );

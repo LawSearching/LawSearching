@@ -15,7 +15,12 @@ class YingjiGuanliShouce_Directory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('进近管制室应急管理手册'),
+        title: Text(
+          '进近管制室应急管理手册',
+          style: TextStyle(
+            fontSize: ScreenUtil().setSp(60.0),
+          ),
+        ),
       ),
       body: ListView.builder(
           itemCount: yingjiDirectorylistName.length, //列表项总数，不设置为无限加载
@@ -32,13 +37,14 @@ class YingjiGuanliShouce_Directory extends StatelessWidget {
             if (index1 == 3) {
               tempdirectorylist = jinjinGuanzhi_Directory_Four;
             }
-            // //第五章 银川进近管制室应急手册检查单
-            // if (index1 == 4) {
-            //   tempdirectorylist = jinjinGuanzhi_Directory_Five;
-            // }
             for (var item in tempdirectorylist) {
               secondaryCategory.add(new ListTile(
-                title: Text(item),
+                title: Text(
+                  item,
+                  style: TextStyle(
+                    fontSize: ScreenUtil().setSp(35.0),
+                  ),
+                ),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -48,19 +54,36 @@ class YingjiGuanliShouce_Directory extends StatelessWidget {
                 },
               ));
             }
-            return ExpansionTile(
-              title: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EmergencyFileReader(
-                              '${yingjiDirectorylistName[index1]}', 'temp')));
-                },
-                child: Text(yingjiDirectorylistName[index1]),
-              ),
-              children: secondaryCategory,
-            );
+            return (index1 == 0 || index1 == 2 || index1 == 5)
+                ? ListTile(
+                    title: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EmergencyFileReader(
+                                    '${yingjiDirectorylistName[index1]}',
+                                    'temp')));
+                      },
+                      child: Text(
+                        yingjiDirectorylistName[index1],
+                        style: TextStyle(
+                          fontSize: ScreenUtil().setSp(40.0),
+                        ),
+                      ),
+                    ),
+                  )
+                : ExpansionTile(
+                    title: InkWell(
+                      child: Text(
+                        yingjiDirectorylistName[index1],
+                        style: TextStyle(
+                          fontSize: ScreenUtil().setSp(40.0),
+                        ),
+                      ),
+                    ),
+                    children: secondaryCategory,
+                  );
           }),
     );
   }
