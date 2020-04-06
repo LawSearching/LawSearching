@@ -19,7 +19,12 @@ class RulerReaderPage extends StatelessWidget {
         textmessage.toString().split(pattern); //每一条文textmessage包含多个‘\n’,需进一步分割
     return Scaffold(
       appBar: AppBar(
-        title: Text('详细条文阅读'),
+        title: Text(
+          '详细条文阅读',
+          style: TextStyle(
+            fontSize: ScreenUtil().setSp(60.0),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Card(

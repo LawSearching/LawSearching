@@ -104,7 +104,7 @@ class _EmergencyFileReaderState extends State<EmergencyFileReader> {
               child: Container(
                 margin: EdgeInsets.all(10.0),
                 child: Text(
-                  '\n' + '${receive_data[index]['内容']}' + '\n',
+                  '\n' + '${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}' + '\n',
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),

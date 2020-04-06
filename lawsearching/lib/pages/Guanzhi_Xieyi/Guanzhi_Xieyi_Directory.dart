@@ -77,7 +77,6 @@ class Guanzhi_Xieyi_Directory extends StatelessWidget {
               fontSize: ScreenUtil().setSp(35.0),
             ),
           ),
-          trailing: Icon(Icons.chevron_right),
           onTap: () {
             Navigator.push(
                 context,
@@ -103,7 +102,6 @@ class Guanzhi_Xieyi_Directory extends StatelessWidget {
               fontSize: ScreenUtil().setSp(35.0),
             ),
           ),
-          trailing: Icon(Icons.chevron_right),
           onTap: () {
             Navigator.push(
                 context,
@@ -129,7 +127,6 @@ class Guanzhi_Xieyi_Directory extends StatelessWidget {
               fontSize: ScreenUtil().setSp(35.0),
             ),
           ),
-          trailing: Icon(Icons.chevron_right),
           onTap: () {
             Navigator.push(
                 context,

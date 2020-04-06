@@ -202,7 +202,12 @@ class CivilAvationRulersDirectory extends StatelessWidget {
       child: ListView.builder(
         itemCount: directorylist.length,
         itemBuilder: (context, index) => ExpansionTile(
-          title: Text(directorylist[index]),
+          title: Text(
+            directorylist[index],
+            style: TextStyle(
+              fontSize: ScreenUtil().setSp(35.0),
+            ),
+          ),
           children: <Widget>[
             _civilAvationDirectory1('国家法律法规', directorylist[index]),
           ],
@@ -313,8 +318,12 @@ class CivilAvationRulersDirectory extends StatelessWidget {
             secondaryCategory = [];
             for (String item in secondarylist) {
               secondaryCategory.add(new ListTile(
-                title: Text(item),
-                trailing: Icon(Icons.chevron_right),
+                title: Text(
+                  item,
+                  style: TextStyle(
+                    fontSize: ScreenUtil().setSp(35.0),
+                  ),
+                ),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -394,7 +403,6 @@ class CivilAvationRulersDirectory extends StatelessWidget {
                     fontSize: ScreenUtil().setSp(35.0),
                   ),
                 ),
-                trailing: Icon(Icons.chevron_right),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -446,7 +454,6 @@ class CivilAvationRulersDirectory extends StatelessWidget {
               fontSize: ScreenUtil().setSp(35.0),
             ),
           ),
-          trailing: Icon(Icons.chevron_right),
           onTap: () {
             Navigator.push(
                 context,
