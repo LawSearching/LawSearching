@@ -109,10 +109,11 @@ class _WorkingManualReaderState extends State<WorkingManualReader> {
 
   @override
   Widget build(BuildContext context) {
+    if(section_name.contains('temp')) section_name='-';
     return Scaffold(
       appBar: AppBar(
           title: Text(
-        '${chapterName[0]}',
+        '${chapter_name}   ${section_name}',
         style: TextStyle(fontSize: ScreenUtil().setSp(50.0)),
       )),
       body: ListView.builder(
@@ -124,7 +125,7 @@ class _WorkingManualReaderState extends State<WorkingManualReader> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          RulerReaderPage('   ${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}')));
+                          RulerReaderPage('${chapter_name}','${section_name}','   ${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}')));
             },
             child: Card(
               elevation: 15.0,

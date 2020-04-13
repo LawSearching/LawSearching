@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawsearching/pages/Guanzhi_Xieyi/GuanZhi_XieYiReader.dart';
-
 import 'Guanzhi_Xieyi_Data.dart';
 
 class Guanzhi_Xieyi_Directory extends StatelessWidget {
@@ -12,7 +11,7 @@ class Guanzhi_Xieyi_Directory extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '管 制 协 议 纪 要',
+          '工 作 协 议 纪 要',
           style: TextStyle(
             fontSize: ScreenUtil().setSp(60),
           ),

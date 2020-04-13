@@ -53,13 +53,19 @@ class _LawNameSearchReaderState extends State<LawNameSearchReader> {
       body: ListView.builder(
         itemCount: receive_data.length,
         itemBuilder: (context, index) {
+          if(receive_data[index]['节'].toString().contains('null'))
+          receive_data[index]['节'] = '-';
           return InkWell(
             onTap: () {
+              print(
+                  ' ${receive_data[index]['内容'].toString().replaceAll('\\n', '  \n      ')}');
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          RulerReaderPage(' ${receive_data[index]['内容']}')));
+                      builder: (context) => RulerReaderPage(
+                          '${receive_data[index]['章']}',
+                          '${receive_data[index]['节']}',
+                          ' ${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}')));
             },
             child: Card(
               elevation: 15.0,
@@ -68,7 +74,10 @@ class _LawNameSearchReaderState extends State<LawNameSearchReader> {
               child: Container(
                 padding: EdgeInsets.all(10.0),
                 child: Text(
-                  '\n' + '     ${receive_data[index]['内容']}' + '\n',
+                  '   ${receive_data[index]['章']}   ${receive_data[index]['节']}' +
+                      '   \n\n' +
+                      '${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}' +
+                      '\n',
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),

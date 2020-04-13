@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../ruler_Read.dart';
 
 var url_1 = "http://39.97.103.161:8080/queryChapter";
@@ -27,10 +26,6 @@ class FileReader extends StatefulWidget {
 class _FileReaderState extends State<FileReader> {
   List chapterName = chapter_name.split(' ');
   List sectionName = section_name.split(' ');
-  Future<String> loadAsset() async {
-    var content = await rootBundle.loadString('assets/TotalRulers.txt');
-    return content;
-  }
 
 /**
  * 章查询
@@ -86,10 +81,11 @@ class _FileReaderState extends State<FileReader> {
 
   @override
   Widget build(BuildContext context) {
+    if (section_name.contains('temp')) section_name = '-';
     return Scaffold(
       appBar: AppBar(
           title: Text(
-        '$chapter_name',
+        '$chapter_name   ${section_name}',
         style: TextStyle(fontSize: ScreenUtil().setSp(50.0)),
       )),
       body: ListView.builder(
@@ -100,8 +96,10 @@ class _FileReaderState extends State<FileReader> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          RulerReaderPage(' ${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}')));
+                      builder: (context) => RulerReaderPage(
+                          '$chapter_name',
+                          '${receive_data[index]['节']}',
+                          ' ${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}')));
             },
             child: Card(
               elevation: 15.0,
@@ -110,7 +108,9 @@ class _FileReaderState extends State<FileReader> {
               child: Container(
                 margin: EdgeInsets.all(10.0),
                 child: Text(
-                  '\n' + '       ${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}' + '\n',
+                  '\n' +
+                      '       ${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}' +
+                      '\n',
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                       color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),

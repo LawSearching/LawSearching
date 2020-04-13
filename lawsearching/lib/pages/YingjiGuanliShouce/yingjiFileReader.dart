@@ -87,10 +87,11 @@ class _EmergencyFileReaderState extends State<EmergencyFileReader> {
 
   @override
   Widget build(BuildContext context) {
+    if (section_name.contains('temp')) section_name = '-';
     return Scaffold(
       appBar: AppBar(
           title: Text(
-        '${chapterName[0]}',
+        '${chapter_name}  ${section_name}',
         style: TextStyle(fontSize: ScreenUtil().setSp(50.0)),
       )),
       body: ListView.builder(
@@ -104,7 +105,9 @@ class _EmergencyFileReaderState extends State<EmergencyFileReader> {
               child: Container(
                 margin: EdgeInsets.all(10.0),
                 child: Text(
-                  '\n' + '${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}' + '\n',
+                  '\n' +
+                      '${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}' +
+                      '\n',
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),
