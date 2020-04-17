@@ -1,6 +1,5 @@
-/**
- * 国家法律法规相关URL连接集合
- */
+/// 国家法律法规相关URL连接集合
+
 var url_1 =
     "http://39.97.103.161:8080/CommonFlyManagementquerybyChapter"; //通用航空飞行管制条例按章查询
 var url_2 =

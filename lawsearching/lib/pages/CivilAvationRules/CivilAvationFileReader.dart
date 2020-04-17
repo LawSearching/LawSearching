@@ -3,7 +3,6 @@
  */
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../ruler_Read.dart';
 import './service_url.dart';
@@ -31,9 +30,8 @@ class CivilAvationFileReader extends StatefulWidget {
 class _CivilAvationFileReaderState extends State<CivilAvationFileReader> {
   List chapterName = chapter_name.split(' ');
   List sectionName = section_name.split(' ');
-/**
- * 章查询
- */
+/// 章查询
+
   Future getchapter(String url, String stringtext) async {
     try {
       receive_data = [];
@@ -41,9 +39,6 @@ class _CivilAvationFileReaderState extends State<CivilAvationFileReader> {
       Response response;
       var data = {"chapter": stringtext};
       response = await Dio().post(url, data: data);
-      // for (var item in response.data) {
-      //  、、 print('返回数据' + item.toString());
-      // }
       setState(() {
         receive_data = response.data;
       });
@@ -52,9 +47,8 @@ class _CivilAvationFileReaderState extends State<CivilAvationFileReader> {
     }
   }
 
-/**
- * 节查询
- */
+/// 节查询
+
   Future getSection(String url, String stringtext1, String stringtext2) async {
     try {
       receive_data = [];
@@ -73,7 +67,6 @@ class _CivilAvationFileReaderState extends State<CivilAvationFileReader> {
 
   @override
   void initState() {
-    // TODO: implement initState
     print('----------');
     print(directory_name);
     print(chapterName[0]);
@@ -259,7 +252,7 @@ class _CivilAvationFileReaderState extends State<CivilAvationFileReader> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-        '$chapter_name'+'   ${section_name}',
+        '$chapter_name'+'   $section_name',
         style: TextStyle(fontSize: ScreenUtil().setSp(50.0)),
       )),
       body: ListView.builder(
@@ -271,7 +264,7 @@ class _CivilAvationFileReaderState extends State<CivilAvationFileReader> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          RulerReaderPage('$chapter_name','${section_name}',' ${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}')));
+                          RulerReaderPage('$chapter_name','$section_name',' ${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}')));
             },
             child: Card(
               elevation: 15.0,

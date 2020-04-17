@@ -3,9 +3,7 @@
  */
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../ruler_Read.dart';
 
 var chapter_name = ''; //章名称
 var section_name = ''; //节名称
@@ -30,9 +28,8 @@ class GuanZhiXieYiReader extends StatefulWidget {
 class _GuanZhiXieYiReaderState extends State<GuanZhiXieYiReader> {
   String chapterName = chapter_name;
   String sectionName = section_name;
-/**
- * 章查询
- */
+/// 章查询
+
   Future getchapter(String url, String stringtext) async {
     try {
       receive_data = [];
@@ -40,9 +37,6 @@ class _GuanZhiXieYiReaderState extends State<GuanZhiXieYiReader> {
       Response response;
       var data = {"chapter": stringtext};
       response = await Dio().post(url, data: data);
-      // for (var item in response.data) {
-      //  、、 print('返回数据' + item.toString());
-      // }
       setState(() {
         receive_data = response.data;
       });
@@ -51,9 +45,8 @@ class _GuanZhiXieYiReaderState extends State<GuanZhiXieYiReader> {
     }
   }
 
-/**
- * 节查询
- */
+/// 节查询
+
   Future getSection(String url, String stringtext1, String stringtext2) async {
     try {
       receive_data = [];
@@ -72,7 +65,6 @@ class _GuanZhiXieYiReaderState extends State<GuanZhiXieYiReader> {
 
   @override
   void initState() {
-    // TODO: implement initState
     if (chapter_name.contains('军航-民航')) {
       if (section_name.contains('2020签字版进近管制室与武警宁夏总队直升机大队飞行管制室管制工作协议')) {
         getSection(guanzhi_url_2, chapterName, sectionName);

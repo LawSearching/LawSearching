@@ -25,9 +25,8 @@ var section_name = ''; //节名称
 List receive_data = [];
 
 class WorkingManualReader extends StatefulWidget {
-  /**
-   * handbookname为培训手册，管理手册，运行手册名称;
-   */
+  /// handbookname为培训手册，管理手册，运行手册名称;
+
   WorkingManualReader(handbookname, chaptername, sectionname) {
     handbook_name = handbookname;
     chapter_name = chaptername;
@@ -43,9 +42,8 @@ class _WorkingManualReaderState extends State<WorkingManualReader> {
   List sectionName = section_name.split(' ');
   String temp_url = ''; //用来选择接口URL；
 
-/**
- * 章查询
- */
+  /// 章查询
+
   Future getchapter(String url, String stringtext) async {
     try {
       receive_data = [];
@@ -61,9 +59,8 @@ class _WorkingManualReaderState extends State<WorkingManualReader> {
     }
   }
 
-/**
- * 节查询
- */
+  /// 节查询
+
   Future getSection(String url, String stringtext1, String stringtext2) async {
     try {
       receive_data = [];
@@ -109,11 +106,11 @@ class _WorkingManualReaderState extends State<WorkingManualReader> {
 
   @override
   Widget build(BuildContext context) {
-    if(section_name.contains('temp')) section_name='-';
+    if (section_name.contains('temp')) section_name = '-';
     return Scaffold(
       appBar: AppBar(
           title: Text(
-        '${chapter_name}   ${section_name}',
+        '$chapter_name   $section_name',
         style: TextStyle(fontSize: ScreenUtil().setSp(50.0)),
       )),
       body: ListView.builder(
@@ -124,8 +121,10 @@ class _WorkingManualReaderState extends State<WorkingManualReader> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          RulerReaderPage('${chapter_name}','${section_name}','   ${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}')));
+                      builder: (context) => RulerReaderPage(
+                          '$chapter_name',
+                          '$section_name',
+                          '   ${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}')));
             },
             child: Card(
               elevation: 15.0,
@@ -134,7 +133,9 @@ class _WorkingManualReaderState extends State<WorkingManualReader> {
               child: Container(
                 margin: EdgeInsets.all(10.0),
                 child: Text(
-                  '\n' + '${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}' + '\n',
+                  '\n' +
+                      '${receive_data[index]['内容'].toString().replaceAll('\\n', '\n      ')}' +
+                      '\n',
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                       color: Colors.black, fontSize: ScreenUtil().setSp(45.0)),

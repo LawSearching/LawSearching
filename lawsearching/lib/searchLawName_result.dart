@@ -3,7 +3,6 @@
  */
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'ruler_Read.dart';
 
@@ -21,9 +20,8 @@ class LawNameSearchReader extends StatefulWidget {
 }
 
 class _LawNameSearchReaderState extends State<LawNameSearchReader> {
-/**
- * 法律名称返回查询
- */
+  /// 法律名称返回查询
+
   Future returnlawList() async {
     try {
       Response response;
@@ -38,7 +36,6 @@ class _LawNameSearchReaderState extends State<LawNameSearchReader> {
 
   @override
   void initState() {
-    // TODO: implement initState
     returnlawList();
   }
 
@@ -53,8 +50,8 @@ class _LawNameSearchReaderState extends State<LawNameSearchReader> {
       body: ListView.builder(
         itemCount: receive_data.length,
         itemBuilder: (context, index) {
-          if(receive_data[index]['节'].toString().contains('null'))
-          receive_data[index]['节'] = '-';
+          if (receive_data[index]['节'].toString().contains('null'))
+            receive_data[index]['节'] = '-';
           return InkWell(
             onTap: () {
               print(

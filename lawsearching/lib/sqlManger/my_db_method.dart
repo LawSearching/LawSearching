@@ -1,49 +1,43 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path_provider/path_provider.dart';
 
-/**
- *  sqflite数据库通用方法
- */
+///  sqflite数据库通用方法
 
 class MyDbMethod {
-  /**
-   * 利用Sqflite数据库存储数据
-   */
+  /// 利用Sqflite数据库存储数据
+
   saveString(String tableName, String columnName, String contents) async {
     final db = await getDataBase('my_db.db', tableName, columnName);
     //写入字符串
     db.transaction((trx) {
       trx.rawInsert('INSERT INTO $tableName($columnName) VALUES("$contents")');
+      return;
     });
     print('存入数据成功');
   }
 
-  /**
-   * 查询存在Sqflite数据库中的数据--->模糊查询(通用方法)
-   */
+  /// 查询存在Sqflite数据库中的数据--->模糊查询(通用方法)
+
   Future<List> searchpossibleString(String tableName, String columnName,
       {String searchName}) async {
     final db = await getDataBase('my_db.db', tableName, columnName);
     List<Map> list = [];
     list = await db
         .rawQuery(
-            'SELECT * FROM $tableName WHERE $columnName like "%${searchName}%"') //模糊查询
+            'SELECT * FROM $tableName WHERE $columnName like "%$searchName%"') //模糊查询
         .then((List<Map> lists) {
       list = lists;
       //获取数据库查询到的数据
       //print('-------->$list');
-      print(list[3]['${columnName}']);
+      print(list[3]['$columnName']);
       return list;
     });
     return list;
   }
 
-  /**
-   * 查询存在Sqflite数据库中的数据
-   */
+  /// 查询存在Sqflite数据库中的数据
+
   Future<List> searchString(String tableName, String columnName,
       {String searchName}) async {
     final db = await getDataBase('my_db.db', tableName, columnName);
@@ -58,9 +52,8 @@ class MyDbMethod {
     return list;
   }
 
-  /**
-   * 获取Sqflite数据库中的某表的全部数据
-   */
+  /// 获取Sqflite数据库中的某表的全部数据
+
   getString(String tableName, String columnName) async {
     final db = await getDataBase('my_db.db', tableName, columnName);
     int listSize = 0;
@@ -68,15 +61,14 @@ class MyDbMethod {
         await db.rawQuery('SELECT * FROM $tableName ').then((List lists) {
       listSize = lists.length;
       //获取数据库中的最后一条数据
-      print('现在数据库中一共有${listSize}条数据');
+      print('现在数据库中一共有$listSize条数据');
       return listSize;
     });
     return listSize;
   }
 
-  /**
-   * 初始化数据库存储路径
-   */
+  /// 初始化数据库存储路径
+
   Future<Database> getDataBase(
       String dbName, String tableName, String columnName) async {
     //获取应用文件目录类似于Ios的NSDocumentDirectory和Android上的 AppData目录

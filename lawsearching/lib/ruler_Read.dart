@@ -18,10 +18,7 @@ class RulerReaderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Pattern pattern = r'\n';
-    if(sectionname.contains('null')) sectionname='-';
-    List text =
-        textmessage.toString().split(pattern); //每一条文textmessage包含多个‘\n’,需进一步分割
+    if (sectionname.contains('null')) sectionname = '-';
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -40,7 +37,7 @@ class RulerReaderPage extends StatelessWidget {
             padding: EdgeInsets.all(10.0),
             width: ScreenUtil().setWidth(2560),
             child: Text(
-              '\n' +textmessage + '\n',
+              '\n' + textmessage + '\n',
               textAlign: TextAlign.justify,
               style: TextStyle(
                   color: Colors.black, fontSize: ScreenUtil().setSp(55.0)),

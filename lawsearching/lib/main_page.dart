@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +43,7 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-/**条纹检索功能 */
+  /// 条纹检索功能 */
   Future getdata(String stringtext) async {
     try {
       print('正在条文搜索数据.....');
@@ -61,9 +60,8 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-/**
- * 法律名称查询
- */
+  /// 法律名称查询
+
   Future getbyLawName(String stringtext) async {
     try {
       print('正在访问法律名称数据...');
@@ -272,7 +270,7 @@ class _MainPageState extends State<MainPage> {
     return Container(
       alignment: Alignment.center,
       width: ScreenUtil().setWidth(2545),
-      height: ScreenUtil().setHeight(1000),
+      height: ScreenUtil().setHeight(1060),
       child: ListView.builder(
         itemCount: receive_data.length,
         itemBuilder: (BuildContext context, int index) {
@@ -315,7 +313,7 @@ class _MainPageState extends State<MainPage> {
               width: ScreenUtil().setWidth(2545),
               child: new Card(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(3.0))),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 child: InkWell(
                   onTap: () {
                     Navigator.push(
@@ -326,16 +324,19 @@ class _MainPageState extends State<MainPage> {
                                 '${lawlistshowconntentlist[i]['节']}',
                                 '   ${lawlistshowconntentlist[i]['内容'].toString().replaceAll('\\n', '\n      ')}')));
                   },
-                  child: Text(
-                    '\n' +
-                        '     ${lawlistshowconntentlist[i]['内容'].toString().replaceAll('\\n', '  \n        ')}' +
-                        '\n',
-                    maxLines: 5,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: ScreenUtil().setSp(44.0)),
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      '\n' +
+                          '     ${lawlistshowconntentlist[i]['内容'].toString().replaceAll('\\n', '  \n        ')}' +
+                          '\n',
+                      maxLines: 5,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: ScreenUtil().setSp(44.0)),
+                    ),
                   ),
                 ),
               ),
@@ -345,57 +346,18 @@ class _MainPageState extends State<MainPage> {
 
 //条文搜索后的返回结果
   Widget _lawlistShow() {
-    // List<Widget> secondaryCategory = [];
-    // int i = 0;
     return Container(
       alignment: Alignment.center,
       width: ScreenUtil().setWidth(2545),
-      height: ScreenUtil().setHeight(1000),
+      height: ScreenUtil().setHeight(1060),
       child: ListView.builder(
         itemCount: lawlistNamelist.length,
         itemBuilder: (BuildContext context, int index) {
           lawlistshowconntentlist = [];
           receive_data1.forEach((key, value) {
-            // print('>>>>>'+value.runtimeType.toString());
             if (key.contains(lawlistNamelist[index]))
               lawlistshowconntentlist = value;
           });
-          // print('第${i}次循环遍历：  '+lawlistshowconntentlist.toString());
-          // print(templist);
-          // secondaryCategory = [];
-          // for (int i = 0; i < lawlistshowconntentlist.length; i++) {
-          //   secondaryCategory.add(
-          //     Card(
-          //       shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.all(Radius.circular(10.0))),
-          //       child: Container(
-          //         width: ScreenUtil().setWidth(2545),
-          //         child: InkWell(
-          //           onTap: () {
-          //             Navigator.push(
-          //                 context,
-          //                 MaterialPageRoute(
-          //                     builder: (context) => RulerReaderPage(
-          //                         '${lawlistshowconntentlist[i]['章']}',
-          //                         '${lawlistshowconntentlist[i]['节']}',
-          //                         '   ${lawlistshowconntentlist[i]['内容'].toString().replaceAll('\\n', '\n      ')}')));
-          //           },
-          //           child: Text(
-          //             '\n' +
-          //                 '     ${lawlistshowconntentlist[i]['内容'].toString().replaceAll('\\n', '  \n        ')}' +
-          //                 '\n',
-          //             maxLines: 5,
-          //             overflow: TextOverflow.ellipsis,
-          //             textAlign: TextAlign.left,
-          //             style: TextStyle(
-          //                 color: Colors.black,
-          //                 fontSize: ScreenUtil().setSp(44.0)),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   );
-          // }
           return ExpansionTile(
             backgroundColor: Colors.black12,
             title: Text(
@@ -409,51 +371,6 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-// //条文检索后对应名称下法律条文内容
-//   Widget _lawlistshowContentlist(
-//       String lawname, List<dynamic> lawlistshowcontentname) {
-//     return Container(
-//       alignment: Alignment.center,
-//       width: ScreenUtil().setWidth(2545),
-//       height: ScreenUtil().setHeight(1000),
-//       child: ListView.builder(
-//         itemCount: lawlistshowcontentname.length,
-//         itemBuilder: (BuildContext context, int index1) {
-//           print(lawlistshowcontentname[index1]);
-//           return InkWell(
-//             onTap: () {
-//               Navigator.push(
-//                   context,
-//                   MaterialPageRoute(
-//                       builder: (context) => RulerReaderPage(
-//                           '${lawlistshowcontentname[index1]['章']}',
-//                           '${lawlistshowcontentname[index1]['节']}',
-//                           '   ${lawlistshowcontentname[index1]['内容'].toString().replaceAll('\\n', '\n      ')}')));
-//             },
-//             child: Card(
-//               elevation: 10.0,
-//               shape: RoundedRectangleBorder(
-//                   borderRadius: BorderRadius.all(Radius.circular(20.0))),
-//               child: Container(
-//                 padding: EdgeInsets.all(10.0),
-//                 child: Text(
-//                   '\n' +
-//                       '     ${lawlistshowcontentname[index1]['内容'].toString().replaceAll('\\n', '  \n        ')}' +
-//                       '\n',
-//                   maxLines: 4,
-//                   overflow: TextOverflow.ellipsis,
-//                   textAlign: TextAlign.justify,
-//                   style: TextStyle(
-//                       color: Colors.black, fontSize: ScreenUtil().setSp(44.0)),
-//                 ),
-//               ),
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-
   Widget _lawList(bool select) {
     return Container(
       height: ScreenUtil().setHeight(1050.0),
@@ -461,7 +378,6 @@ class _MainPageState extends State<MainPage> {
         gradient: LinearGradient(
           colors: <Color>[
             Colors.lightBlue[800],
-            // Colors.blueAccent[100],
             Colors.lightBlueAccent,
           ],
           begin: Alignment.topCenter,

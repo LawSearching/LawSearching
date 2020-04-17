@@ -30,9 +30,8 @@ class _EmergencyFileReaderState extends State<EmergencyFileReader> {
     return content;
   }
 
-/**
- * 章查询
- */
+  /// 章查询
+
   Future getchapter(String stringtext) async {
     try {
       receive_data = [];
@@ -51,9 +50,8 @@ class _EmergencyFileReaderState extends State<EmergencyFileReader> {
     }
   }
 
-/**
- * 节查询
- */
+  /// 节查询
+
   Future getSection(String stringtext1, String stringtext2) async {
     try {
       receive_data = [];
@@ -91,7 +89,7 @@ class _EmergencyFileReaderState extends State<EmergencyFileReader> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-        '${chapter_name}  ${section_name}',
+        '$chapter_name  $section_name',
         style: TextStyle(fontSize: ScreenUtil().setSp(50.0)),
       )),
       body: ListView.builder(
